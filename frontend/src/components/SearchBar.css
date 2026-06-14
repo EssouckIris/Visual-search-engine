@@ -1,0 +1,51 @@
+.searchbar {
+  border: 2px dashed var(--blue);
+  border-radius: 16px;
+  padding: 3rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--bg-card);
+  margin-bottom: 2rem;
+}
+
+.searchbar:hover,
+.searchbar.drag-over {
+  border-color: var(--pink);
+  background-color: #1f1f1f;
+  transform: scale(1.01);
+}
+
+.icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.main-text {
+  font-size: 1.2rem;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+
+.sub-text {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  background: linear-gradient(90deg, var(--yellow), var(--pink));
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 25px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: opacity 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}

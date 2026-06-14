@@ -1,0 +1,16 @@
+torch
+torchvision
+
+pillow
+opencv-python-headless
+
+numpy
+faiss-cpu
+scikit-learn
+
+flask
+flask-cors
+gunicorn
+
+tqdm
+python-dotenv

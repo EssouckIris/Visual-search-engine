@@ -1,0 +1,87 @@
+.image-card {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #2a2a2a;
+  transition: transform 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+
+.image-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--pink);
+}
+
+.card-image-wrapper {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.image-card:hover img {
+  transform: scale(1.05);
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.image-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.view-btn {
+  color: white;
+  font-size: 0.95rem;
+  background: var(--pink);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+}
+
+.card-info {
+  padding: 0.8rem;
+}
+
+.score-bar-wrapper {
+  background: #2a2a2a;
+  border-radius: 10px;
+  height: 5px;
+  margin-bottom: 0.6rem;
+  overflow: hidden;
+}
+
+.score-bar {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.similarity {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.rank {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}

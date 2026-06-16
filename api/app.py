@@ -60,7 +60,8 @@ def search():
 
         response = []
         for r in results:
-            fixed_path = fix_path(r["path"])
+            raw = str(r["path"]).replace('\\', '/').split('/')[-1]
+            fixed_path = fix_path(raw)
             response.append({
                 "score": round(r["score"], 4),
                 "image": image_to_base64(fixed_path),

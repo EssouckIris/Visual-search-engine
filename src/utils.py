@@ -4,10 +4,22 @@ from PIL import Image
 
 def image_to_base64(image_path):
     """Convertit une image en base64 pour l'envoyer au frontend"""
+    # Corriger le chemin pour HuggingFace
+    if not os.path.exists(image_path):
+        # Essayer chemin relatif
+        filename = os.path.basename(image_path)
+        alt_path = os.path.join(
+            os.path.dirname(__file__), '..', 
+            'data', 'raw', 'clothing-dataset', 'images', filename
+        )
+        if os.path.exists(alt_path):
+            image_path = alt_path
+        else:
+            return None
+
     with open(image_path, "rb") as img_file:
         encoded = base64.b64encode(img_file.read()).decode("utf-8")
     
-    # Détecter l'extension
     ext = os.path.splitext(image_path)[1].lower()
     mime_types = {
         ".jpg": "image/jpeg",
@@ -15,6 +27,9 @@ def image_to_base64(image_path):
         ".png": "image/png",
         ".webp": "image/webp"
     }
+    mime = mime_types.get(ext, "image/jpeg")
+    
+    return f"data:{mime};base64,{encoded}"
     mime = mime_types.get(ext, "image/jpeg")
     
     return f"data:{mime};base64,{encoded}"

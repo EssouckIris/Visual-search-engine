@@ -8,10 +8,17 @@ class ImageSearcher:
         self.embeddings = np.load(
             f"{embeddings_dir}/embeddings.npy"
         )
+        
         self.image_paths = np.load(
             f"{embeddings_dir}/image_paths.npy",
             allow_pickle=True
         )
+    
+
+        self.image_paths = np.array([
+            str(p).replace('\\', '/').split('/')[-1] 
+            for p in self.image_paths
+        ])
         self.encoder = ImageEncoder()
         print(f"✅ {len(self.embeddings)} embeddings chargés")
 

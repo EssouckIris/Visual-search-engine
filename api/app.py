@@ -5,10 +5,17 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 def fix_path(windows_path):
-    """Convertit un chemin Windows en chemin HuggingFace"""
-    filename = os.path.basename(str(windows_path))
-    base_dir = os.path.join(os.path.dirname(__file__), '..', 'data', 'raw', 'clothing-dataset', 'images')
-    return os.path.join(base_dir, filename)
+    """Convertit un chemin Windows/absolu en chemin relatif serveur"""
+    # Normalise les backslashes Windows en slashes
+    normalized = str(windows_path).replace('\\', '/')
+    # Extrait juste le nom du fichier
+    filename = normalized.split('/')[-1]
+    # Reconstruit le chemin vers les images dans le container
+    base_dir = os.path.join(
+        os.path.dirname(__file__),
+        '..', 'data', 'raw', 'clothing-dataset', 'images'
+    )
+    return os.path.normpath(os.path.join(base_dir, filename))
 # Ajouter src au path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 

@@ -51,12 +51,14 @@ def search():
         top_k = int(request.form.get('top_k', 10))
         results = searcher.search(tmp_path, top_k=top_k)
 
-        fixed_path = fix_path(r["path"])
-        response.append({
-            "score": round(r["score"], 4),
-            "image": image_to_base64(fixed_path),
-            "path": fixed_path
-        })
+        response = []
+        for r in results:
+            fixed_path = fix_path(r["path"])
+            response.append({
+                "score": round(r["score"], 4),
+                "image": image_to_base64(fixed_path),
+                "path": fixed_path
+            })
 
         return jsonify({"results": response})
 

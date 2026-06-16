@@ -4,6 +4,11 @@ import tempfile
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+def fix_path(windows_path):
+    """Convertit un chemin Windows en chemin HuggingFace"""
+    filename = os.path.basename(str(windows_path))
+    base_dir = os.path.join(os.path.dirname(__file__), '..', 'data', 'raw', 'clothing-dataset', 'images')
+    return os.path.join(base_dir, filename)
 # Ajouter src au path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
@@ -46,13 +51,12 @@ def search():
         top_k = int(request.form.get('top_k', 10))
         results = searcher.search(tmp_path, top_k=top_k)
 
-        response = []
-        for r in results:
-            response.append({
-                "score": round(r["score"], 4),
-                "image": image_to_base64(r["path"]),
-                "path": r["path"]
-            })
+        fixed_path = fix_path(r["path"])
+        response.append({
+            "score": round(r["score"], 4),
+            "image": image_to_base64(fixed_path),
+            "path": fixed_path
+        })
 
         return jsonify({"results": response})
 
